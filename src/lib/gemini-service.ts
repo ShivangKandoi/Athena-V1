@@ -2,6 +2,12 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Initialize the API with the API key from environment variables
 const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY || '';
+
+// Validate API key is present
+if (!API_KEY && typeof window !== 'undefined') {
+  console.error('WARNING: Gemini API key is missing. AI features will not work correctly.');
+}
+
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Gemini model to use

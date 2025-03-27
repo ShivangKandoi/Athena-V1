@@ -126,7 +126,15 @@ export async function registerServiceWorker(): Promise<ServiceWorkerRegistration
   }
 
   try {
-    const registration = await navigator.serviceWorker.register('/service-worker.js');
+    // Use the API route to serve the service worker instead of direct file access
+    // Add a cache-busting query parameter to prevent caching issues
+    const swUrl = `/api/service-worker?v=${Date.now()}`;
+    
+    // Register the service worker
+    const registration = await navigator.serviceWorker.register(swUrl, {
+      scope: '/'
+    });
+    
     console.log('Service worker registered:', registration);
     return registration;
   } catch (error) {

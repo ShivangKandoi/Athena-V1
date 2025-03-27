@@ -10,8 +10,16 @@ const sendTokenResponse = (user, statusCode, res) => {
       Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production'
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    path: '/'
   };
+
+  // Production environment should use secure cookies
+  if (process.env.NODE_ENV === 'production') {
+    // HTTPS required for secure cookies
+    options.secure = true;
+  }
 
   res
     .status(statusCode)
@@ -125,10 +133,15 @@ exports.getMe = async (req, res) => {
 // @route   GET /api/auth/logout
 // @access  Private
 exports.logout = (req, res) => {
-  res.cookie('token', 'none', {
+  const cookieOptions = {
     expires: new Date(Date.now() + 10 * 1000),
-    httpOnly: true
-  });
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    path: '/'
+  };
+
+  res.cookie('token', 'none', cookieOptions);
 
   res.status(200).json({
     success: true,

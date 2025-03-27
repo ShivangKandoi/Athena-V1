@@ -27,14 +27,32 @@ exports.protect = async (req, res, next) => {
   }
 
   try {
+    // Verify JWT secret exists
+    if (!process.env.JWT_SECRET) {
+      console.error('JWT_SECRET is not defined in environment variables');
+      return res.status(500).json({
+        success: false,
+        message: 'Server configuration error'
+      });
+    }
+
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Set user to req
     req.user = await User.findById(decoded.id);
 
+    // Check if user exists in database
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        message: 'User no longer exists'
+      });
+    }
+
     next();
   } catch (err) {
+    console.error(`Auth error: ${err.message}`);
     return res.status(401).json({
       success: false,
       message: 'Not authorized to access this route'

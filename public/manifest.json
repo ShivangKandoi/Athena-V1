@@ -71,7 +71,7 @@
   },
   "protocol_handlers": [],
   "serviceworker": {
-    "src": "/service-worker.js",
+    "src": "/api/service-worker",
     "scope": "/"
   }
 } 
