@@ -174,7 +174,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Update user
   const updateUser = async (updatedUser: Partial<User>) => {
     try {
-      console.log("Updating user:", updatedUser);
+      console.log("Updating user with data:", JSON.stringify(updatedUser));
       const res = await fetchWithTimeout(`${API_URL}/auth/update`, {
         method: "PUT",
         credentials: "include",
@@ -185,12 +185,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
 
       const data = await res.json();
-      console.log("Update response:", data);
+      console.log("Update response from server:", data);
 
       if (res.ok && data.success) {
-        setUser(prev => prev ? { ...prev, ...data.data } : null);
+        console.log("Setting user state with:", data.data);
+        setUser(prev => {
+          if (!prev) return null;
+          return {
+            ...prev,
+            ...data.data,
+            avatar: data.data.avatar || prev.avatar,
+          };
+        });
         return { success: true };
       } else {
+        console.error("Update failed:", data.message);
         return { 
           success: false, 
           message: data.message || "Update failed" 

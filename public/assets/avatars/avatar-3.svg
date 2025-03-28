@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Multi-color background -->
+  <rect width="512" height="512" rx="256" fill="#111111"/>
+  
+  <!-- Cyberpunk-inspired elements -->
+  <path d="M156 256H356" stroke="#FF00FF" stroke-width="12" stroke-linecap="round"/>
+  <path d="M256 156V356" stroke="#00FFFF" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Diagonal accents -->
+  <path d="M156 156L356 356" stroke="#FFFF00" stroke-width="8" stroke-linecap="round" stroke-dasharray="16 16"/>
+  <path d="M356 156L156 356" stroke="#00FF00" stroke-width="8" stroke-linecap="round" stroke-dasharray="16 16"/>
+  
+  <!-- Glowing eyes -->
+  <circle cx="206" cy="206" r="24" fill="#FF00FF"/>
+  <circle cx="306" cy="206" r="24" fill="#00FFFF"/>
+  
+  <!-- Geometric face elements -->
+  <path d="M206 306H306" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Triangle elements -->
+  <path d="M226 176L206 206L246 206L226 176Z" fill="white"/>
+  <path d="M326 176L286 206L326 206L326 176Z" fill="white"/>
+  
+  <!-- Futuristic ear pieces -->
+  <rect x="136" y="186" width="20" height="60" rx="10" fill="#00FF00"/>
+  <rect x="356" y="186" width="20" height="60" rx="10" fill="#FFFF00"/>
+</svg> 

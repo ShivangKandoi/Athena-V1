@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192" height="192" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient circle -->
+  <circle cx="256" cy="256" r="256" fill="url(#paint0_linear)"/>
+  
+  <!-- Dollar sign -->
+  <path d="M256 120V392" stroke="white" stroke-width="24" stroke-linecap="round"/>
+  <path d="M312 168H218C194 168 174 188 174 212C174 236 194 256 218 256H294C318 256 338 276 338 300C338 324 318 344 294 344H200" 
+        stroke="white" stroke-width="24" stroke-linecap="round"/>
+  
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#10B981"/>
+      <stop offset="0.5" stop-color="#059669"/>
+      <stop offset="1" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+</svg> 

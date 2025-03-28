@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <rect width="512" height="512" rx="256" fill="url(#paint0_linear)"/>
+  
+  <!-- Abstract face elements -->
+  <circle cx="196" cy="216" r="24" fill="white"/>
+  <circle cx="316" cy="216" r="24" fill="white"/>
+  
+  <!-- Cool sunglasses -->
+  <path d="M156 216C156 194.461 173.461 177 195 177H197C218.539 177 236 194.461 236 216V216C236 237.539 218.539 255 197 255H195C173.461 255 156 237.539 156 216V216Z" fill="black"/>
+  <path d="M276 216C276 194.461 293.461 177 315 177H317C338.539 177 356 194.461 356 216V216C356 237.539 338.539 255 317 255H315C293.461 255 276 237.539 276 216V216Z" fill="black"/>
+  <rect x="236" y="206" width="40" height="20" fill="black"/>
+  
+  <!-- Cool smile -->
+  <path d="M206 293C206 293 226 333 256 333C286 333 306 293 306 293" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Funky hair -->
+  <path d="M126 185C126 185 146 125 196 125C246 125 236 95 256 95C276 95 266 125 316 125C366 125 386 185 386 185" stroke="#FFD700" stroke-width="20" stroke-linecap="round"/>
+  
+  <!-- Earrings -->
+  <circle cx="136" cy="225" r="8" fill="#00FFFF"/>
+  <circle cx="376" cy="225" r="8" fill="#FF69B4"/>
+  
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+</svg> 

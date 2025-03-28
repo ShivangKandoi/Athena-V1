@@ -116,7 +116,7 @@ exports.getMe = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        avatar: user.avatar,
+        avatar: user.avatar || '',
         settings: user.settings
       }
     });
@@ -154,14 +154,39 @@ exports.logout = (req, res) => {
 // @access  Private
 exports.updateDetails = async (req, res) => {
   try {
+    console.log("Update request body:", req.body);
+    
     const fieldsToUpdate = {
       name: req.body.name,
       email: req.body.email
     };
+    
+    // Add avatar if it exists in the request
+    if (req.body.avatar) {
+      console.log("Updating avatar:", req.body.avatar);
+      fieldsToUpdate.avatar = req.body.avatar;
+    } else {
+      console.log("No avatar in request body");
+    }
+    
+    // Add settings if they exist in the request
+    if (req.body.settings) {
+      console.log("Updating settings:", req.body.settings);
+      fieldsToUpdate.settings = req.body.settings;
+    }
 
+    console.log("Fields to update:", fieldsToUpdate);
+    
     const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
       new: true,
       runValidators: true
+    });
+
+    console.log("Updated user:", {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar
     });
 
     res.status(200).json({
@@ -170,7 +195,7 @@ exports.updateDetails = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        avatar: user.avatar,
+        avatar: user.avatar || '',
         settings: user.settings
       }
     });

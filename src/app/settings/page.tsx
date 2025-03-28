@@ -12,6 +12,9 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { AvatarSelector } from "@/components/avatar-selector";
 import {
   Bell,
   Building,
@@ -31,7 +34,16 @@ import {
   Wallet,
   Droplets,
   Sparkles,
-  Activity
+  Activity,
+  Sliders,
+  Key,
+  Eye,
+  EyeOff,
+  UserCircle,
+  BellRing,
+  Check,
+  AlertCircle,
+  FileText
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -54,6 +66,7 @@ export default function SettingsPage() {
   
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [pushNotifications, setPushNotifications] = useState(true);
   const [taskReminders, setTaskReminders] = useState(true);
@@ -75,7 +88,14 @@ export default function SettingsPage() {
   const [healthCheckReminder, setHealthCheckReminder] = useState(true);
   const [healthCheckTime, setHealthCheckTime] = useState("19:00");
   const [healthCheckDays, setHealthCheckDays] = useState([0, 3, 6]); // Sunday, Wednesday, Saturday
-
+  
+  // Security fields
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+  
   // Redirect if not logged in
   useEffect(() => {
     if (!loading && !user) {
@@ -88,6 +108,7 @@ export default function SettingsPage() {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setAvatar(user.avatar || "");
       if (user.settings?.notifications) {
         setTaskReminders(user.settings.notifications.tasks);
         setHealthReminders(user.settings.notifications.health);
@@ -234,12 +255,21 @@ export default function SettingsPage() {
     }
   };
 
+  // Handle avatar selection
+  const handleAvatarSelect = (avatarUrl: string) => {
+    console.log("Avatar selected:", avatarUrl);
+    setAvatar(avatarUrl);
+    toast.success("Avatar selected. Save changes to update your profile.");
+  };
+
   const handleSaveProfile = async () => {
     setIsSaving(true);
+    console.log("Saving profile with avatar:", avatar);
     try {
       const result = await updateUser({ 
         name, 
         email,
+        avatar,
         settings: {
           theme: user?.settings?.theme || 'system',
           notifications: {
@@ -250,14 +280,15 @@ export default function SettingsPage() {
         }
       });
       
+      console.log("Profile update result:", result);
       if (result.success) {
         toast.success("Profile updated successfully");
       } else {
         toast.error(result.message || "Failed to update profile");
       }
     } catch (error) {
-      toast.error("Something went wrong");
-      console.error(error);
+      console.error("Error updating profile:", error);
+      toast.error("An unexpected error occurred. Please try again.");
     } finally {
       setIsSaving(false);
     }
@@ -316,15 +347,16 @@ export default function SettingsPage() {
               <CardContent className="space-y-6">
                 <div className="flex flex-col md:flex-row gap-6 md:items-center">
                   <Avatar className="h-24 w-24">
-                    <AvatarImage src={user.avatar} alt={user.name} />
+                    <AvatarImage src={avatar} alt={user?.name} />
                     <AvatarFallback>
                       <User className="h-12 w-12" />
                     </AvatarFallback>
                   </Avatar>
-                  <Button variant="outline" size="sm" className="w-full md:w-auto">
-                    <Edit className="mr-2 h-4 w-4" />
-                    Change Avatar
-                  </Button>
+                  <AvatarSelector 
+                    currentAvatarUrl={avatar}
+                    onSelect={handleAvatarSelect}
+                    className="w-full md:w-auto"
+                  />
                 </div>
 
                 <Separator />

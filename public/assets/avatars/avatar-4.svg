@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pastel background -->
+  <rect width="512" height="512" rx="256" fill="#FDF2F8"/>
+  
+  <!-- Geometric pattern -->
+  <circle cx="256" cy="256" r="200" fill="#FBCFE8"/>
+  <rect x="156" y="156" width="200" height="200" fill="#F9A8D4"/>
+  <path d="M206 156L156 206L206 256L256 206L206 156Z" fill="#F472B6"/>
+  <path d="M306 156L256 206L306 256L356 206L306 156Z" fill="#F472B6"/>
+  <path d="M206 256L156 306L206 356L256 306L206 256Z" fill="#F472B6"/>
+  <path d="M306 256L256 306L306 356L356 306L306 256Z" fill="#F472B6"/>
+  <circle cx="256" cy="256" r="50" fill="#EC4899"/>
+  
+  <!-- Minimalist face -->
+  <circle cx="226" cy="226" r="12" fill="white"/>
+  <circle cx="286" cy="226" r="12" fill="white"/>
+  <path d="M226 286H286" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Abstract hair elements -->
+  <path d="M176 176C176 176 196 136 256 136C316 136 336 176 336 176" stroke="white" stroke-width="12" stroke-linecap="round"/>
+</svg> 

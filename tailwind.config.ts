@@ -51,6 +51,18 @@ export default {
           '5': 'hsl(var(--chart-5))'
         }
       },
+      keyframes: {
+        spring: {
+          '0%': { transform: 'translateX(0) scale(1)' },
+          '25%': { transform: 'translateX(0) scale(1.05)' },
+          '50%': { transform: 'translateX(0) scale(0.95)' },
+          '75%': { transform: 'translateX(0) scale(1.02)' },
+          '100%': { transform: 'translateX(0) scale(1)' },
+        }
+      },
+      animation: {
+        'ease-spring': 'spring 0.5s ease-out',
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',

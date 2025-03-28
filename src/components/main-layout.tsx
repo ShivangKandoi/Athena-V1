@@ -16,7 +16,7 @@ interface MainLayoutProps {
 
 export function MainLayout({ children, className }: MainLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col bg-background pb-14">
+    <div className="flex min-h-screen flex-col bg-background pb-16">
       <header className="sticky top-0 z-40 border-b border-slate-200/80 dark:border-slate-800/80 bg-background/90 backdrop-blur-xl shadow-sm">
         <div className="flex h-14 items-center justify-between px-4">
           <div className="flex items-center">
