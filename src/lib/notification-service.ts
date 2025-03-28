@@ -130,9 +130,10 @@ export async function registerServiceWorker(): Promise<ServiceWorkerRegistration
     // Add a cache-busting query parameter to prevent caching issues
     const swUrl = `/api/service-worker?v=${Date.now()}`;
     
-    // Register the service worker
+    // Register the service worker with skipWaiting to ensure it activates immediately
     const registration = await navigator.serviceWorker.register(swUrl, {
-      scope: '/'
+      scope: '/',
+      updateViaCache: 'none'
     });
     
     console.log('Service worker registered:', registration);
@@ -436,5 +437,47 @@ export function setupNotificationHandlers(): void {
         }
       }
     });
+  }
+}
+
+// Export a function to clear all service worker caches
+export async function clearServiceWorkerCaches(): Promise<boolean> {
+  if (!('caches' in window)) {
+    return false;
+  }
+  
+  try {
+    // Get all cache keys
+    const cacheKeys = await caches.keys();
+    
+    // Delete each cache
+    await Promise.all(
+      cacheKeys.map(key => caches.delete(key))
+    );
+    
+    console.log('All service worker caches cleared');
+    return true;
+  } catch (error) {
+    console.error('Error clearing service worker caches:', error);
+    return false;
+  }
+}
+
+// Add a function to unregister service workers
+export async function unregisterServiceWorkers(): Promise<boolean> {
+  if (!('serviceWorker' in navigator)) {
+    return false;
+  }
+  
+  try {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    await Promise.all(
+      registrations.map(registration => registration.unregister())
+    );
+    console.log('Service workers unregistered');
+    return true;
+  } catch (error) {
+    console.error('Error unregistering service workers:', error);
+    return false;
   }
 } 
