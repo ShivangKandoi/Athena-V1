@@ -140,6 +140,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (res.ok && data.success) {
         setUser(data.user);
+        // Force a hard navigation to ensure clean state
+        window.location.href = "/";
         return { success: true };
       } else {
         return { 

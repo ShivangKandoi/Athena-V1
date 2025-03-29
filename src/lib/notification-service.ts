@@ -136,6 +136,11 @@ export async function registerServiceWorker(): Promise<ServiceWorkerRegistration
       updateViaCache: 'none'
     });
     
+    // Ensure the service worker is activated immediately
+    if (registration.active) {
+      registration.active.postMessage({ type: 'SKIP_WAITING' });
+    }
+    
     console.log('Service worker registered:', registration);
     return registration;
   } catch (error) {
