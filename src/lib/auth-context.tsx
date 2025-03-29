@@ -40,7 +40,11 @@ const fetchWithTimeout = async (url: string, options: RequestInit, timeout = 800
   try {
     const response = await fetch(url, {
       ...options,
-      signal: controller.signal
+      signal: controller.signal,
+      headers: {
+        ...options.headers,
+        'Accept': 'application/json',
+      }
     });
     clearTimeout(id);
     return response;
@@ -134,6 +138,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         },
         body: JSON.stringify({ email, password }),
       });
+
+      // Check if response is JSON
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        console.error("Server returned non-JSON response:", await res.text());
+        return { 
+          success: false, 
+          message: "Server error. Please try again later." 
+        };
+      }
 
       const data = await res.json();
       console.log("Login response:", data);
